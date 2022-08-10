@@ -48,9 +48,9 @@ export default function App() {
           <Link to="/logout" className="ml-3 hover:underline text-blue-600">
             Log out
           </Link>
-          <Link to="/seed" className="ml-3 hover:underline text-blue-600">
+          {/* <Link to="/seed" className="ml-3 hover:underline text-blue-600">
             Seed
-          </Link>
+          </Link> */}
         </header>
         <Outlet />
         <ScrollRestoration />
