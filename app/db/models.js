@@ -17,12 +17,10 @@ const profileSchema = new Schema(
       required: [true, "Name is required"],
     },
     bio: {
-      type: String,
-      required: true
+      type: String
     },
     tags: {
-      type: [String],
-      required: true
+      type: String
     },
     websiteUrl: {
       type: String

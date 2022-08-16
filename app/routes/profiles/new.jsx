@@ -26,8 +26,8 @@ export async function action({ request }) {
       );
     const newProfile = await db.models.Profile.create({
       bio: form.get("bio"),
-      tags: form.get("tags"),
       websiteUrl: form.get("websiteUrl"),
+      tags: form.get("tags"),
       userId: userId,
     });
     return redirect(`/profiles/${newProfile._id}`);
@@ -42,7 +42,6 @@ export async function action({ request }) {
 
 export default function CreateProfile() {
   const actionData = useActionData();
-  let tagsArray = [];
   return (
     <div className="m-3">
       <h2>New profile</h2>
