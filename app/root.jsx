@@ -6,9 +6,29 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
 import styles from "~/tailwind.css";
+import connectDb from "~/db/connectDb.server.js";
+import { getSession } from "~/sessions.server.js";
+import { json } from "@remix-run/node";
 
+
+export async function loader({ request }) {
+  const db = await connectDb();
+  const session = await getSession(request.headers.get("Cookie"));
+  const profile = await db.models.Profile.findOne({
+    userId: session.get("userId"),
+  });
+  const hasProfile = await db.models.Profile.findOne({
+    userId: session.get("userId"),
+  });
+  return json({
+    profileId: profile ? profile._id : null,
+    hasProfile: hasProfile ? true : false,
+  });
+
+}
 export const links = () => [
   {
     rel: "stylesheet",
@@ -25,6 +45,7 @@ export function meta() {
 }
 
 export default function App() {
+  const { profileId, hasProfile } = useLoaderData();
   return (
     <html lang="en">
       <head>

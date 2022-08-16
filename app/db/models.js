@@ -9,12 +9,21 @@ const profileSchema = new Schema(
     profileImgUrl: {
       type: String,
       required: true,
+      default: 
+      "https://avatars.dicebear.com/api/male/alexlind.svg"
+    },
+    name: {
+      type: String,
+      required: [true, "Name is required"],
     },
     bio: {
       type: String,
       required: true
     },
-    tags: [tagSchema],
+    tags: {
+      type: [String],
+      required: true
+    },
     websiteUrl: {
       type: String
     },
@@ -32,11 +41,12 @@ const userSchema = new Schema(
       type: String,
       unique: true,
       required: [true, "Username is required"],
-      minLength: [3, "TUsername is too short"],
+      minLength: [3, "Username is too short"],
     },
     password: {
       type: String,
       required: true,
+      minLength: [8, "Password must be at least 8 characters long"]
     },
   },
   { timestamps: true }

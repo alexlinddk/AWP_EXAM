@@ -1,8 +1,7 @@
 import { Form, useActionData } from "@remix-run/react";
 import { redirect, json } from "@remix-run/node";
 import connectDb from "~/db/connectDb.server.js";
-import { getSession, commitSession } from "~/sessions.server.js";
-import { useState } from "react";
+import { getSession } from "~/sessions.server.js";
 
 export async function loader({ request }) {
   const session = await getSession(request.headers.get("Cookie"));

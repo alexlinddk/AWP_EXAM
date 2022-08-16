@@ -1,29 +1,34 @@
 import { Form, useActionData } from "@remix-run/react";
 import { redirect, json } from "@remix-run/node";
 import connectDb from "~/db/connectDb.server.js";
-import { getSession, commitSession } from "~/sessions.server.js";
-import { useState } from "react";
+import { requireUserSession } from "~/sessions.server.js";
+
 
 export async function loader({ request }) {
-  const session = await getSession(request.headers.get("Cookie"));
-  if (!session.has("userId")) {
-    throw redirect("/login");
-  }
+  await requireUserSession(request);
   return null;
 }
 export async function action({ request }) {
-  const session = await getSession(request.headers.get("Cookie"));
-  if (!session.has("userId")) {
-    throw redirect("/login");
-  }
+  const session = await requireUserSession(request);
+  const userId = session.get("userId");
   const form = await request.formData();
   const db = await connectDb();
+
   try {
+    const hasProfile = await db.models.Profile.findOne({
+      userId: userId,
+    });
+
+    if (hasProfile !== null)
+      return json(
+        { errors: { hasProfile: "You already created a profile!" } },
+        { status: 400 }
+      );
     const newProfile = await db.models.Profile.create({
-      profileImgUrl: form.get("profileImgUrl"),
       bio: form.get("bio"),
-      tags: tagsArray,
-      userId: session.get("userId")
+      tags: form.get("tags"),
+      websiteUrl: form.get("websiteUrl"),
+      userId: userId,
     });
     return redirect(`/profiles/${newProfile._id}`);
   } catch (error) {
@@ -33,6 +38,7 @@ export async function action({ request }) {
     );
   }
 }
+
 
 export default function CreateProfile() {
   const actionData = useActionData();
@@ -44,6 +50,11 @@ export default function CreateProfile() {
         <p className="text-red-500 font-bold my-3">{actionData.errorMessage}</p>
       ) : null}
       <Form method="post" className="text-inherit">
+        {actionData?.errors.hasProfile && (
+          <p className="text-red-500 mt-1 mb-0 py-4">
+            {actionData.errors.hasProfile}
+          </p>
+        )}
         <Input
           type="url"
           name="profileImgUrl"
@@ -56,13 +67,18 @@ export default function CreateProfile() {
           id="bio"
           placeholder="Bio"
         />
-        <label htmlFor="tags">Choose tags:</label>
-        <select id="tags" name="tags">
-          <option value="JavaScript" onClick={(e) => tagsArray.push(e.target.value)}>JavaScript</option>
-          <option value="C#" onClick={(e) => tagsArray.push(e.target.value)}>C#</option>
-          <option value="HTML" onClick={(e) => tagsArray.push(e.target.value)}>HTML</option>
-          <option value="CSS" onClick={(e) => tagsArray.push(e.target.value)}>CSS</option>
-        </select>
+        <Input
+          type="text"
+          name="websiteUrl"
+          id="websiteUrl"
+          placeholder="Website"
+        />
+        <Input
+          type="text"
+          name="tags"
+          id="tags"
+          placeholder="Tags"
+        />
         <div className="flex flex-row items-center gap-3">
           <button type="submit" className="my-3 p-2 border rounded">
             Save

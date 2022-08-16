@@ -2,6 +2,7 @@ import { useLoaderData, useCatch } from "@remix-run/react";
 import { json } from "@remix-run/node";
 import connectDb from "~/db/connectDb.server.js";
 
+
 export async function loader({ params }) {
   const db = await connectDb();
   const profile = await db.models.Profile.findById(params.profileId);

@@ -85,6 +85,7 @@ export default function Login() {
           <button type="submit" className="my-3 p-2 border rounded">
             Log in
           </button>
+
           <span className="italic">or</span>
           <Link to="/register" className="underline">
             Sign up
