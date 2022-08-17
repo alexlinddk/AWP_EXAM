@@ -47,28 +47,28 @@ export default function CreateProfile() {
         name="name"
         id="name"
         placeholder={profile?.name}
-        defaultvalue={profile?.name}
+        defaultValue={profile?.name}
       />
       <Input
         type="text"
         name="bio"
         id="bio"
         placeholder={profile?.bio}
-        defaultvalue={profile?.bio}
+        defaultValue={profile?.bio}
       />
       <Input
         type="text"
         name="websiteUrl"
         id="websiteUrl"
         placeholder={profile?.websiteUrl}
-        defaultvalue={profile?.websiteUrl}
+        defaultValue={profile?.websiteUrl}
       />
       <Input
         type="text"
         name="tags"
         id="tags"
         placeholder={profile?.tags}
-        defaultvalue={profile?.tags}
+        defaultValue={profile?.tags}
       />
       <div className="flex flex-row items-center gap-3">
         <button type="submit" className="my-3 p-2 border rounded">
