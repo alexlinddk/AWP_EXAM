@@ -39,7 +39,7 @@ export const links = () => [
 export function meta() {
   return {
     charset: "utf-8",
-    title: "Remix + MongoDB",
+    title: "Renter App",
     viewport: "width=device-width,initial-scale=1",
   };
 }
@@ -62,9 +62,6 @@ export default function App() {
             New profile
           </Link>
           )}
-          <Link to={`/profiles/update/${profileId}`} className="ml-3 hover:underline text-blue-600">
-            New profile
-          </Link>
           <Link to="/register" className="ml-3 hover:underline text-blue-600">
             Register
           </Link>
@@ -82,6 +79,9 @@ export default function App() {
               Edit
             </Link>
           )}
+          <Link to="/seed" className="ml-3 hover:underline text-blue-600">
+            Seed
+          </Link>
         </header>
         <Outlet />
         <ScrollRestoration />

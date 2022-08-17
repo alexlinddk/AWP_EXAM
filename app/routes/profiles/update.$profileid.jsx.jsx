@@ -31,7 +31,7 @@ export async function loader({ params }) {
   return profiles;
 }
 
-export default function UpdateProfile() {
+export default function CreateProfile() {
   const profile = useLoaderData();
   const actionData = useActionData();
 

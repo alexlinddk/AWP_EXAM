@@ -60,6 +60,17 @@ export default function ProfilePage() {
           <p className="font-bold">Creation date</p>
           <p className="mb-5">{createdAt}</p>
         </div>
+        <Form method="post">
+            <input type="hidden" name="id" value={profile._id} />
+            <button
+              type="submit"
+              name="_action"
+              value="delete"
+              className="bg-transparent hover:bg-red-500 text-red-500 hover:text-white py-2 px-4 border border-red-500 hover:border-transparent"
+            >
+            Delete profile
+            </button>
+          </Form>
       </div>
     </div>
   );
