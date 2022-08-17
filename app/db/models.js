@@ -2,8 +2,6 @@ import { mongoose } from "mongoose";
 
 const { Schema } = mongoose;
 
-const tagSchema = new Schema({ type: String });
-
 const profileSchema = new Schema(
   {
     profileImgUrl: {

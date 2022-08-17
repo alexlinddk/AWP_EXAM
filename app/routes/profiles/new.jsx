@@ -25,6 +25,7 @@ export async function action({ request }) {
         { status: 400 }
       );
     const newProfile = await db.models.Profile.create({
+      name: form.get("name"),
       bio: form.get("bio"),
       websiteUrl: form.get("websiteUrl"),
       tags: form.get("tags"),
@@ -59,6 +60,12 @@ export default function CreateProfile() {
           name="profileImgUrl"
           id="profileImgUrl"
           placeholder="Profile Image URL"
+        />
+        <Input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="Name"
         />
         <Input
           type="text"
