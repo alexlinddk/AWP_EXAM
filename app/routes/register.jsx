@@ -39,7 +39,7 @@ export async function action({ request }) {
     });
     if (user) {
       const session = await getSession(request.headers.get("Cookie"));
-      return redirect("/", {
+      return redirect("/profiles/new", {
         headers: {
           "Set-Cookie": await commitSession(session),
         }

@@ -57,7 +57,12 @@ export default function App() {
           <Link to="/" className="hover:underline text-blue-600">
             Home
           </Link>
+          {!hasProfile && (
           <Link to="/profiles/new" className="ml-3 hover:underline text-blue-600">
+            New profile
+          </Link>
+          )}
+          <Link to={`/profiles/update/${profileId}`} className="ml-3 hover:underline text-blue-600">
             New profile
           </Link>
           <Link to="/register" className="ml-3 hover:underline text-blue-600">
@@ -69,9 +74,14 @@ export default function App() {
           <Link to="/logout" className="ml-3 hover:underline text-blue-600">
             Log out
           </Link>
-          {/* <Link to="/seed" className="ml-3 hover:underline text-blue-600">
-            Seed
-          </Link> */}
+          <Link to={`/profiles/${profileId}`} className="ml-3 hover:underline text-blue-600">
+            My Profile
+          </Link>
+          {hasProfile && (
+          <Link to={`/profiles/update/${profileId}`} className="ml-3 hover:underline text-blue-600">
+              Edit
+            </Link>
+          )}
         </header>
         <Outlet />
         <ScrollRestoration />

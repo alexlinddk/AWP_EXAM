@@ -1,4 +1,4 @@
-import { useLoaderData, useCatch } from "@remix-run/react";
+import { useLoaderData, useCatch, Link, Form, useParams } from "@remix-run/react";
 import { json } from "@remix-run/node";
 import connectDb from "~/db/connectDb.server.js";
 import { requireUserSession } from "../../sessions.server";
@@ -18,23 +18,17 @@ export async function action({ request, params }) {
         { status: 400 }
       );
     }
-  } 
+  }
   return null;
 }
 
 export async function loader({ params, request }) {
   const db = await connectDb();
+  
   const profile = await db.models.Profile.findById(params.profileId);
   if (!profile) {
     throw new Response(`Couldn't find profile with id ${params.profileId}`, {
       status: 404,
-    });
-  }
-  const session = await requireUserSession(request);
-  const userId = session.get("userId");
-  if (userId != profile.userId) {
-    throw new Response(`Profile with id ${params.profileId} doesn't belong to the user`, {
-      status: 403,
     });
   }
   return json(profile);
@@ -42,13 +36,30 @@ export async function loader({ params, request }) {
 
 export default function ProfilePage() {
   const profile = useLoaderData();
+  const createdAt = new Date(profile.createdAt).toLocaleDateString(
+    "da-DK",
+    {
+      dateStyle: "long",
+    }
+  );
   return (
-    <div>
-      <div>
-        <img src="https://avatars.dicebear.com/api/male/{}.svg" />
-      </div>
-      <div>
-        
+    <div className="flex justify-center">
+      <div className="card shadow-md w-72 m-9 p-9">
+        <div className="rounded-full overflow-hidden mb-5">
+          <img src={`https://avatars.dicebear.com/api/adventurer-neutral/${profile.name}.svg?background=variant02`} />
+        </div>
+        <div className="">
+          <p className="font-bold">Name</p>
+          <p className="mb-5">{profile.name}</p>
+          <p className="font-bold">Bio</p>
+          <p className="rounded bg-slate-200 p-3 mb-5">{profile.bio}</p>
+          <p className="font-bold">Tags</p>
+          <p className="mb-5">{profile.tags}</p>
+          <p className="font-bold">Website</p>
+          <a className="mb-5" href={profile.websiteUrl}>{profile.websiteUrl}</a>
+          <p className="font-bold">Creation date</p>
+          <p className="mb-5">{createdAt}</p>
+        </div>
       </div>
     </div>
   );

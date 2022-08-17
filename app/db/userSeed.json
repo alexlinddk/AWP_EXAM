@@ -1,0 +1,42 @@
+[
+    {
+        "_id": "62fc8e996a90552fc97f25ea",
+        "username": "user1",
+        "password": "$2a$10$2aZG9Q3mo6OajKHGrGouOeYZPE8Xe.cS5LsMFF6J7bHKqB46bVnKO",
+        "createdAt": "2022-08-17T06:45:45.738Z",
+        "updatedAt": "2022-08-17T06:45:45.738Z",
+        "__v": 0
+      },
+      {
+        "_id": "62fc8ee46a90552fc97f2601",
+        "username": "user2",
+        "password": "$2a$10$8Kb1kxVt.VHIaDSGyy.4IuUIq/1epDdx/yh3oK1FuafFQ6ExcuCWC",
+        "createdAt": "2022-08-17T06:47:00.764Z",
+        "updatedAt": "2022-08-17T06:47:00.764Z",
+        "__v": 0
+      },
+      {
+        "_id": "62fc8f0b6a90552fc97f2618",
+        "username": "user3",
+        "password": "$2a$10$d7J2q3IRID8tJnsGkqd2OetnGZch8v73evAUGQ3p/EHDeSYaYAE76",
+        "createdAt": "2022-08-17T06:47:39.428Z",
+        "updatedAt": "2022-08-17T06:47:39.428Z",
+        "__v": 0
+      },
+      {
+        "_id": "62fc8f4b6a90552fc97f2630",
+        "username": "user4",
+        "password": "$2a$10$p8mJ01wu1kSa/yGy0Lm3Gu6YF.nDkpQYwIeLPoKghHnO9f72CZvZy",
+        "createdAt": "2022-08-17T06:48:43.968Z",
+        "updatedAt": "2022-08-17T06:48:43.968Z",
+        "__v": 0
+      },
+      {
+        "_id": "62fc8fcc6a90552fc97f2653",
+        "username": "user6",
+        "password": "$2a$10$aQ.GCMG/AIPPoA28cjavFubXIgfcqVBW3m29uYf50Ek/wR9xmZx1u",
+        "createdAt": "2022-08-17T06:50:52.589Z",
+        "updatedAt": "2022-08-17T06:50:52.589Z",
+        "__v": 0
+      }
+    ]

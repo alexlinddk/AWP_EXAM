@@ -1,0 +1,63 @@
+[
+    {
+        "_id": "62fc8ebc6a90552fc97f25f6",
+        "profileImgUrl": "https://avatars.dicebear.com/api/adventurer-default/alexlind.svg",
+        "name": "Jens Jensen",
+        "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae purus faucibus ornare suspendisse. Ac ut consequat semper viverra.",
+        "tags": "Ryger, Hygge, Fest",
+        "websiteUrl": "www.google.com",
+        "userId": "62fc8e996a90552fc97f25ea",
+        "createdAt": "2022-08-17T06:46:20.415Z",
+        "updatedAt": "2022-08-17T06:46:20.415Z",
+        "__v": 0
+    },
+      {
+        "_id": "62fc8efc6a90552fc97f260d",
+        "profileImgUrl": "https://avatars.dicebear.com/api/adventurer-default/alexlind.svg",
+        "name": "Hans Hansen",
+        "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae purus faucibus ornare suspendisse. Ac ut consequat semper viverra.",
+        "tags": "Læse, Fitness, Studie",
+        "websiteUrl": "google.com",
+        "userId": "62fc8ee46a90552fc97f2601",
+        "createdAt": "2022-08-17T06:47:24.061Z",
+        "updatedAt": "2022-08-17T06:47:24.061Z",
+        "__v": 0
+      },
+      {
+        "_id": "62fc8f356a90552fc97f2624",
+        "profileImgUrl": "https://avatars.dicebear.com/api/adventurer-default/alexlind.svg",
+        "name": "Niels Nielsen",
+        "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae purus faucibus ornare suspendisse. Ac ut consequat semper viverra.",
+        "tags": "Rejse, Mad, Yoga",
+        "websiteUrl": "google.com",
+        "userId": "62fc8f0b6a90552fc97f2618",
+        "createdAt": "2022-08-17T06:48:21.056Z",
+        "updatedAt": "2022-08-17T06:48:21.056Z",
+        "__v": 0
+      },
+      {
+        "_id": "62fc8fa26a90552fc97f263b",
+        "profileImgUrl": "https://avatars.dicebear.com/api/adventurer-default/alexlind.svg",
+        "name": "Fie Petersen",
+        "bio": "Lorem ippsum dolores Lorem ippsum dolores Lorem ippsum dolores Lorem ippsum dolores Lorem ippsum dolores Lorem ippsum dolores",
+        "tags": "Netflix, Fællesspisning, Hygge",
+        "websiteUrl": "www.google.com",
+        "userId": "62fc8f4b6a90552fc97f2630",
+        "createdAt": "2022-08-17T06:50:10.739Z",
+        "updatedAt": "2022-08-17T06:50:10.739Z",
+        "__v": 0
+      },
+      {
+        "_id": "62fc8ffd6a90552fc97f265e",
+        "profileImgUrl": "https://avatars.dicebear.com/api/adventurer-default/alexlind.svg",
+        "name": "Henriette Dam",
+        "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae purus faucibus ornare suspendisse. Ac ut consequat semper viverra.",
+        "tags": "Fitness, Fest, Læse",
+        "websiteUrl": "google.com",
+        "userId": "62fc8fcc6a90552fc97f2653",
+        "createdAt": "2022-08-17T06:51:41.593Z",
+        "updatedAt": "2022-08-17T06:51:41.593Z",
+        "__v": 0
+      }
+
+]

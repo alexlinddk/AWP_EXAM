@@ -8,7 +8,7 @@ const profileSchema = new Schema(
       type: String,
       required: true,
       default: 
-      "https://avatars.dicebear.com/api/male/alexlind.svg"
+      "https://avatars.dicebear.com/api/adventurer-default/alexlind.svg"
     },
     name: {
       type: String,

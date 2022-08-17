@@ -1,73 +1,97 @@
-import { Form, useActionData } from "@remix-run/react";
+import { useLoaderData, Form, useActionData } from "@remix-run/react";
 import { redirect, json } from "@remix-run/node";
 import connectDb from "~/db/connectDb.server.js";
 import { getSession } from "~/sessions.server.js";
+import { Link, Outlet, useSearchParams } from "react-router-dom";
 
 export async function loader({ request }) {
-  const session = await getSession(request.headers.get("Cookie"));
-  if (!session.has("userId")) {
-    throw redirect("/login");
-  }
-  return null;
-}
-export async function action({ request }) {
-  const session = await getSession(request.headers.get("Cookie"));
-  if (!session.has("userId")) {
-    throw redirect("/login");
-  }
-  const form = await request.formData();
   const db = await connectDb();
-  try {
-    const newProfile = await db.models.Profile.create({
-      profileImgUrl: form.get("profileImgUrl"),
-      bio: form.get("bio"),
-      tags: tagsArray,
-      userId: session.get("userId")
-    });
-    return redirect(`/profiles/${newProfile._id}`);
-  } catch (error) {
-    return json(
-      { errors: error.errors, values: Object.fromEntries(form) },
-      { status: 400 }
-    );
-  }
+  const url = new URL(request.url);
+  const sort = url.searchParams.get("sort");
+  const query = url.searchParams.get("query");
+  const profiles = await db.models.Profile.find(
+    query
+      ? {
+          $or: [
+            { name: { $regex: new RegExp(query, "i") } },
+            { tags: {  $regex: new RegExp(query, "i") } },
+          ],
+        }
+      : {}
+  ).sort({
+    [sort]: 1,
+  });
+
+  return profiles;
 }
 
-export default function CreateProfile() {
-  const actionData = useActionData();
-  let tagsArray = [];
+export default function Home() {
+  const profiles = useLoaderData();
+  const [searchParams] = useSearchParams();
+
   return (
-    <div className="m-3">
-      <h2>New profile</h2>
-      {actionData?.errorMessage ? (
-        <p className="text-red-500 font-bold my-3">{actionData.errorMessage}</p>
-      ) : null}
-      <Form method="post" className="text-inherit">
-        <Input
-          type="url"
-          name="profileImgUrl"
-          id="profileImgUrl"
-          placeholder="Profile Image URL"
-        />
-        <Input
-          type="text"
-          name="bio"
-          id="bio"
-          placeholder="Bio"
-        />
-        <label htmlFor="tags">Choose tags:</label>
-        <select id="tags" name="tags">
-          <option value="JavaScript" onClick={(e) => tagsArray.push(e.target.value)}>JavaScript</option>
-          <option value="C#" onClick={(e) => tagsArray.push(e.target.value)}>C#</option>
-          <option value="HTML" onClick={(e) => tagsArray.push(e.target.value)}>HTML</option>
-          <option value="CSS" onClick={(e) => tagsArray.push(e.target.value)}>CSS</option>
-        </select>
-        <div className="flex flex-row items-center gap-3">
-          <button type="submit" className="my-3 p-2 border rounded">
-            Save
-          </button>
+    <div className="col-span-2 mb-5 list-none pl-0 text-slate-800">
+    <div className="bg-slate-100">
+        <Form className="group relative" method="GET">
+          <svg
+            width="20"
+            height="20"
+            fill="currentColor"
+            className="absolute left-4 top-7 -mt-2.5 pointer-events-none"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+            />
+          </svg>
+          <input
+            className="w-full appearance-none text-sm leading-6 py-4 pl-12 pr-4"
+            type="text"
+            name="query"
+            aria-label="Filter projects"
+            placeholder="Filter projects..."
+            defaultValue={searchParams.get("query")}
+          />
+        </Form>
+      </div>
+      <h1 className="text-3xl font-bold text-slate-800 m-8">
+        Welcome {profiles?.name}
+      </h1>
+      <p className="text-slate-800 mx-8">List of available renters</p>
+      <div className="grid grid-cols-3">
+        <div className="flex col-span-2">
+          {profiles.map((profile) => {
+            const createdAt = new Date(profile.createdAt).toLocaleDateString(
+              "da-DK",
+              {
+                dateStyle: "long",
+              }
+            );
+            return (
+              <div className="clear-both m-8 pt-4 text-sm" key={profile._id}>
+                <div className="card shadow-md w-72 m-9 p-9 hover:shadow-blue-300 active:shadow-blue-500">
+                  <div className="rounded-full overflow-hidden mb-5">
+                    <img src={`https://avatars.dicebear.com/api/adventurer-neutral/${profile.name}.svg?background=variant02`} />
+                  </div>
+                  <div className="">
+                    <p className="font-bold">Name</p>
+                    <p className="mb-5">{profile.name}</p>
+                    <p className="font-bold">Bio</p>
+                    <p className="rounded bg-slate-200 p-3 mb-5 truncate">{profile.bio}</p>
+                    <p className="font-bold">Tags</p>
+                    <p className="mb-5">{profile.tags}</p>
+                    <p className="font-bold">Creation date</p>
+                    <p className="mb-5">{createdAt}</p>
+                    <Link to={`/profiles/${profile._id}`} className="bg-slate-200 rounded p-3">Got to profile</Link>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
-      </Form>
+      </div>
     </div>
   );
 }
