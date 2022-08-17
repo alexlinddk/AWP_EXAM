@@ -7,9 +7,9 @@ import seedProfilesData from "~/db/profileSeed.json";
 export async function loader() {
   const db = await connectDb();
   const count = await db.models.Profile.countDocuments();
-  if (count > 0) {
-    return redirect("/");
-  }
+  // if (count > 0) {
+  //   return redirect("/");
+  // }
   return null;
 }
 
